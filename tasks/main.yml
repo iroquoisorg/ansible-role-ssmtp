@@ -1,0 +1,24 @@
+---
+- name: Install mail package
+  apt:
+    name: mailutils
+    state: present
+    update_cache: yes
+    cache_valid_time: "{{ apt_cache_valid_time | default(3600) }}"
+
+- name: Install sSMTP packages
+  apt:
+    name: ssmtp
+    state: present
+    update_cache: yes
+    cache_valid_time: "{{ apt_cache_valid_time | default(3600) }}"
+
+- name: Create sSMTP revaliases file
+  template:
+    src: revaliases.j2
+    dest: /etc/ssmtp/revaliases
+
+- name: Create sSMTP configuration file
+  template:
+    src: ssmtp.conf.j2
+    dest: /etc/ssmtp/ssmtp.conf
