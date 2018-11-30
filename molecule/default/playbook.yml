@@ -1,6 +1,7 @@
 ---
-- hosts: localhost
-  remote_user: root
+- name: Converge
+  hosts: all
+  become: true
   vars:
     ssmtp_root: user@example.com
     ssmtp_mailhub: smtp.example.com
@@ -8,4 +9,4 @@
     ssmtp_auth_user: "someuser"
     ssmtp_auth_pass: "secret"
   roles:
-    - ansible-role-ssmtp
+    - role: ansible-role-ssmtp
